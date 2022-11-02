@@ -1,0 +1,18 @@
+.nav-item {
+    margin-left: 100px;
+}
+
+.container-fluid {
+    padding : 12px;
+}
+
+.navbar-brand {
+    margin-left: 10px;
+    font-size: 25px;
+    color :rgb(132, 148, 235);
+}
+
+.nav-item-end {
+    margin-left: 20px;
+    margin-right: 10px;
+}

@@ -1,0 +1,88 @@
+.errorSignUp {
+    position: absolute;
+    margin-top: 8px;
+    color : red;
+    font-size: 12px;
+    margin-left: 16%;
+  }
+
+  .formSignUp {
+    position : absolute;
+    top : 20%;
+    bottom: 14%;
+    width:100%;
+    max-width: 1060px;
+    padding : 0 20px;
+    border-style:solid;
+    border-color: aqua;
+    border-width: 2px;
+    left : 50%;
+    transform: translate(-50%, 0);
+  
+    background-color : white;
+    border-radius: 3em;
+    box-shadow:  0 0.188em 1.550em rgb(156,156,156);
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-image: url(/src/image/train.gif);
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  .titleSignUp {
+    font-size: 35px;
+    margin-top: 30px;
+    margin-bottom: 1em;
+    margin-right: 4.5em;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .errorSignUp {
+    margin-left: 2px;
+    margin-top:2px;
+  }
+
+  .btnSignUp:hover {
+    transform: scale(1.08);
+  }
+
+  .btnSignUp {
+      
+    border : none;
+    width : 140px;
+    height : 3em;
+    color: white;
+    background-color: rgb(32,177,255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    margin-top: 10px;
+    margin-right: 9em;
+}
+
+.inputSignUp {
+    height : 45px;
+    font-size: 14px;
+    width: 30em;
+    margin-right: 1em;
+}
+
+.btnDuplicateId {
+  border : none;
+  margin-left: 21em;
+  font-size: 14px;
+  color : gray;
+}
+
+.btnDuplicateName {
+  border : none;
+  margin-left: 21em;
+  font-size: 14px;
+  color : gray;
+}
+
+

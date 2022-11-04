@@ -18,10 +18,26 @@ function Signup(e) {
     const [allowLogin,setAllowLogin] = useState(true);
     const [isCheckIdFirst, setIsCheckIdFirst] = useState(false);
     const [isCheckNameFirst, setIsCheckNameFirst] = useState(false);
+    const [isDuplicateId, setIsDuplicateId] = useState(true);
+    const [isDuplicateName, setIsDuplicateName] = useState(true);
+
+
 
 
     const navigate = useNavigate();
 
+
+        const handleOnKeyId = () => {
+            setIsCheckIdFirst(false)
+            setIsDuplicateId(true)
+
+        }
+
+        const handleOnKeyName = () => {
+            setIsCheckNameFirst(false)
+            setIsDuplicateName(true)
+
+        }
 
 
 
@@ -84,10 +100,9 @@ function Signup(e) {
 
 
 
-
-
         const checkDuplicateId = (e) => {
             e.preventDefault();
+            
 
             axios.get('http://52.79.209.184:8080/signup/checkDuplicateId',  {
                 params : {userId : userId}
@@ -97,16 +112,19 @@ function Signup(e) {
                         },
             })
             .then((res) => {
-                if(res.data.isDuplicated === true){
-                    alert('이미 사용중인 아이디입니다.');
+                if(res.data.isDuplicated === true){ // 아이디가 중복이면
                     setIsCheckIdFirst(false);
+                    setIsDuplicateId(false);
+                
                 } else {
-                    alert('사용 가능한 아이디입니다.');
                     setIsCheckIdFirst(true);
+                    setIsDuplicateId(true);
                 }
             })
         }
 
+
+        
 
 
 
@@ -121,16 +139,22 @@ function Signup(e) {
                         },
             })
             .then((res) => {
-                if(res.data.isDuplicated === true){
-                    alert('이미 사용중인 닉네임입니다.');
-                    setIsCheckNameFirst(false);
+                if(res.data.isDuplicated === true){ // 닉네임이 중복이면
+                    setIsCheckNameFirst(false); 
+                    setIsDuplicateName(false);
+                    
                 } else {
-                    alert('사용 가능한 닉네임입니다.');
                     setIsCheckNameFirst(true);
+                    setIsDuplicateName(true);
+                    
                 }
+                
             })
-        }
-       
+    }
+
+
+    
+
        
 
 
@@ -175,37 +199,59 @@ function Signup(e) {
         <Form.Label className="titleSignUp">Sign Up</Form.Label>
       <Form.Group className="mb-4" controlId="formUserId">
         <Form.Label>아이디</Form.Label>
-        <button className='btnDuplicateId' onClick={checkDuplicateId} required>중복확인</button>
+        <button className='btnDuplicateId' onClick={checkDuplicateId}>중복확인</button>
+        
+
+
         <Form.Control className="inputSignUp"
             type="text"
             placeholder ="영문,숫자 포함 5자 이상 입력해주세요"
             value={userId}
-            maxlength="19"
-            onChange={handleId}/>
-            <div className="errorSignUp">
-                    {
-                        !idVaild && userId.length > 0 && (
-                            <div>영문,숫자 포함 5자 이상 입력해주세요</div>
-                        )
-                    }
-                </div>
+            maxLength="19"
+            onChange={handleId}
+            onKeyUp={handleOnKeyId}
+            onKeyDown={handleOnKeyId}
+            />
+
+            
+            <div className='errorSignUp'>
+                {
+                    !idVaild && userId.length > 0 ? <p>영문,숫자 포함 5자 이상 입력해주세요</p> : 
+                    !isDuplicateId && !isCheckIdFirst ? <p> 이미 사용중인 아이디 입니다.</p> :
+                    isDuplicateId && isCheckIdFirst ? <p style={{color:'green'}}>사용 가능한 아이디 입니다.</p> :
+	                null
+                }
+            </div>
+
+            
       </Form.Group>
+
+
+
+
       <Form.Group className="mb-4" controlId="formUserName">
         <Form.Label>닉네임</Form.Label>
-        <button className='btnDuplicateName' onClick={checkDuplicateName} required>중복확인</button>
+        <button className='btnDuplicateName' onClick={checkDuplicateName} >중복확인</button>
         <Form.Control className="inputSignUp"
             type="text"
             placeholder="닉네임을 입력해주세요."
             value={userName}
-            maxlength="9"
-            onChange={handleName} />
-            <div className="errorSignUp">
-                    {
-                        !nameVaild && userName.length > 0 && (
-                            <div>2자 이상 입력해주세요.</div>
-                        )
-                    }
-                </div>
+            maxLength="9"
+            onChange={handleName}
+            onKeyDown={handleOnKeyName}
+            onKeyUp={handleOnKeyName} />
+            
+            <div className='errorSignUp'>
+                {
+                    !nameVaild && ( userName.length > 0 ) ? <p>2자 이상 입력해주세요.</p> :
+                    !isCheckNameFirst && !isDuplicateName ? <p> 이미 사용중인 닉네임 입니다.</p> :
+                    isCheckNameFirst && isDuplicateName ? <p style={{color:'green'}}>사용 가능한 닉네임 입니다.</p> :
+	                null
+                }
+            </div>
+
+
+
       </Form.Group>
 
       <Form.Group className="mb-4" controlId="formUserPassword">
@@ -214,7 +260,7 @@ function Signup(e) {
             type="password"
             placeholder="영문,숫자,특수문자 포함 8자 이상 입력해주세요."
             value={userPassword}
-            maxlength="20"
+            
             onChange={handlePw}/>
             <div className="errorSignUp">
                  {
@@ -230,7 +276,7 @@ function Signup(e) {
             type="password"
             placeholder="비밀번호 확인을 위해 한번 더 입력해주세요."
             value={userPasswordConfirm}
-            maxlength="20"
+            
             onChange={handlePwConfirm}/>
             <div className="errorSignUp">
                  {

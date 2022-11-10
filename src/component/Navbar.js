@@ -11,8 +11,6 @@ const Navbar = () => {
     const [login, setLogin] = useRecoilState(loginState);
     const [user, setUser] = useRecoilState(userState);
     
-
-
     const navigate = useNavigate();
 
 
@@ -30,7 +28,7 @@ const Navbar = () => {
                 setLogin(false);
                 setUser(null);
                 alert('로그아웃 되었습니다.');
-                navigate('/');
+                navigate('/login')
             }
             
             

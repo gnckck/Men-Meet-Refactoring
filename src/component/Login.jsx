@@ -2,25 +2,35 @@ import React from "react";
 import './Login.css';
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useSetRecoilState } from "recoil";
+import { loginState, userState} from './State';
 
-const User = {
-    id: 'mentoss1',
-    pw: 'mentoss1!'
-}
 
 
 export default function Login() {
 
+
+    const navigate = useNavigate();
+
     const [idVaild,setIdValid] = useState(false);
     const [pwVaild,setPwValid] = useState(false);
-    const [id,setId] = useState('');
-    const [pw,setPw] = useState("");
+    const [userId,setUserId] = useState('');
+    const [userPassword,setUserPassword] = useState("");
 
+    const setLogin = useSetRecoilState(loginState);
+    const setUser = useSetRecoilState(userState);
+
+
+
+    
 
     const [popupStyle, showPopup] = useState("hide");
     const [allowLogin,setAllowLogin] = useState(true);
 
+
+    
 
 
 
@@ -34,21 +44,13 @@ export default function Login() {
 
 
 
-    const popup = () => {
-        showPopup("login-popup")
-        setTimeout(()=> showPopup("hide"),1000)
-        if(id === User.id && pw === User.pw) {
-            alert("로그인에 성공했습니다.");
-        }else{
-            showPopup("loginFail-popup")
-        }
-    }
+    
 
 
 
     const handleId = (e) => {
-        setId(e.target.value);
-        if(setId.value < 0) {
+        setUserId(e.target.value);
+        if(setUserId.value < 0) {
             setIdValid(false);
         }else{
             setIdValid(true);
@@ -56,14 +58,40 @@ export default function Login() {
     }
 
     const handlePw = (e) => {
-        setPw(e.target.value);
-        if(setPw.value < 0) {
+        setUserPassword(e.target.value);
+        if(setUserPassword.value < 0) {
             setPwValid(false);
         }else{
             setPwValid(true);
         }
     }
     
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+
+        axios.post('http://52.79.209.184:8080/login', {
+            userId : userId,
+            userPassword : userPassword
+        }, {
+            headers : { "Content-Type": `application/json`, },
+        })
+        .then((res) => {
+            console.log(res)
+            if(res.data.isLoginConfirmed === true){
+            setLogin(true);
+            setUser(res.data.userName);
+            alert((res.data.userName) + `님 Men-Meet에 어서오세용~!`)
+            navigate("/");}
+            else{
+                setLogin(false);
+                setTimeout(()=> showPopup("hide"),1000)
+                showPopup("loginFail-popup")
+            }
+        }).catch((error) => {
+            console.log('로그인 실패,',error.response);
+        })
+    }
 
     
 
@@ -77,26 +105,27 @@ export default function Login() {
                 
                 <div className="inputLoginWrap">
                     <input type="text" className="inputLogin" placeholder="ID"
-                            value={id}
+                            value={userId}
                             onChange={handleId}/>
                 </div>
                 <br /><br />
 
                 <div className="inputLoginWrap">
                     <input type="password" className="inputLogin" placeholder="PASSWORD"
-                            value={pw}
+                            value={userPassword}
                             onChange={handlePw} />
                     </div>
             </div>
                 <div>
-                    <button onClick={popup} className="btnLogin"  disabled={allowLogin} >Login</button>
+                    <button onClick={handleLogin} className="btnLogin"  disabled={allowLogin} >Login</button>
                 </div>
                 <Link to="/signUp" className="linkSignUpPage">Sign Up</Link>
 
                 <div className={popupStyle}>
                 <h3>일치하는 회원정보가 없습니다.</h3>
+                </div>
+
         </div>
-            
-        </div>
+       
     );
 }

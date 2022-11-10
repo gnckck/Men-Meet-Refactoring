@@ -10,13 +10,15 @@ import Users from './pages/Users';
 import Mypage from './component/Mypage';
 import Mentoring from './component/Mentoring';
 import Program from './component/Program';
+import { RecoilRoot } from 'recoil';
+
 
 
 function App() {
 
 
   return (
-    <BrowserRouter>
+    <RecoilRoot><BrowserRouter>
     <Navbar />
     <Routes>
     <Route path="/" element={<Main/>} />
@@ -29,7 +31,7 @@ function App() {
 
 
     </Routes>
-    </BrowserRouter>
+    </BrowserRouter></RecoilRoot>
   );
 }
 

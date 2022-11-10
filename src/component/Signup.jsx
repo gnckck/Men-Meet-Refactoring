@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-function Signup(e) {
+function Signup() {
     const [userId,setUserId] = useState("");
     const [userName,setUserName] = useState("");
     const [userPassword,setUserPassword] = useState("");

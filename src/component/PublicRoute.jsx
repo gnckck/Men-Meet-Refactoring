@@ -6,7 +6,7 @@ import { loginState } from './State';
 
     const login = useRecoilValue(loginState);
 
-    return login ? <Navigate to="/" /> : component;
+    return login === true ? <Navigate to="/" /> : component;
     
     }
  export default PublicRoute;

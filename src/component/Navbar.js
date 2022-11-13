@@ -24,11 +24,14 @@ const Navbar = () => {
         })
         .then((res) => {
             console.log(res)
-            if(res.data.isLogout === true){
+            if(res.data.isLogout === false){
+                setLogin(true);
+            }else{
                 setLogin(false);
                 setUser(null);
+                localStorage.clear();
                 alert('로그아웃 되었습니다.');
-                navigate('/login')
+                navigate('/login');
             }
             
             
@@ -63,13 +66,13 @@ const Navbar = () => {
                 <ul className="nav justify-content-end">
                     <li className="nav-item-end">
                         {
-                            login === false ? <Link className="nav-link-login" to="/login">로그인</Link> :
+                            login ? <Link className="nav-link-login" to="/login">로그인</Link> :
                             <Link onClick={handleLogout}>로그아웃</Link>
                         }   
                     </li>
                     <li className="nav-item-end">
                         {
-                            login === false ? <Link className="nav-link-singup" to="/signup">회원가입</Link> :
+                            login ? <Link className="nav-link-singup" to="/signup">회원가입</Link> :
                             <Link className="nav-link-mypage" to="/mypage">{user}님</Link>
                         
                         }

@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Signup() {
+
+
     const [userId,setUserId] = useState("");
     const [userName,setUserName] = useState("");
     const [userPassword,setUserPassword] = useState("");
@@ -15,7 +17,9 @@ function Signup() {
     const [nameVaild,setNameValid] = useState(false);
     const [pwVaild,setPwValid] = useState(false);
     const [pwConfirmVaild,setPwConfirmValid] = useState(false);
-    const [allowLogin,setAllowLogin] = useState(true);
+    const [allowSignUp,setAllowSignUp] = useState(true);
+    const [allowDuplicateId,setAllowDuplicateId] = useState(true);
+    const [allowDuplicateName,setAllowDuplicateName] = useState(true);
     const [isCheckIdFirst, setIsCheckIdFirst] = useState(false);
     const [isCheckNameFirst, setIsCheckNameFirst] = useState(false);
     const [isDuplicateId, setIsDuplicateId] = useState(true);
@@ -23,14 +27,14 @@ function Signup() {
 
 
 
-
+   
     const navigate = useNavigate();
 
 
         const handleOnKeyId = () => {
             setIsCheckIdFirst(false)
             setIsDuplicateId(true)
-
+            
         }
 
         const handleOnKeyName = () => {
@@ -39,9 +43,24 @@ function Signup() {
 
         }
 
+        const handleOnKeyPw = (e) => {
+            setUserPassword(e.target.value);
+            if(e.target.value !== userPasswordConfirm){
+                setPwConfirmValid(false);
+                
+            }
+        }
+
+        const handleKeyDown = (e) => {
+            if(e.code === "Enter")
+            e.preventDefault();
+        }
+
+
 
 
         const handleId = (e) => {
+                e.preventDefault();
                 setUserId(e.target.value);
                 const idRegex = /^(?=.*[a-zA-Z])(?=.*[0-9]).{5,20}$/;
                 if(idRegex.test(e.target.value)) {
@@ -54,6 +73,7 @@ function Signup() {
 
 
             const handleName = (e) => {
+                e.preventDefault();
                 setUserName(e.target.value);
                 const idRegex = /^().{2,10}$/;
                 if(idRegex.test(e.target.value)) {
@@ -67,43 +87,60 @@ function Signup() {
 
         
         const handlePw = (e) => {
+            e.preventDefault();
             setUserPassword(e.target.value);
             const pwRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}$/;
             if(pwRegex.test(e.target.value)) {
                 setPwValid(true);
+            
             }else{
                 setPwValid(false);
-                
             }
         }
 
         const handlePwConfirm = (e) => {
+            e.preventDefault();
             setUserPasswordConfirm(e.target.value);
-            if(e.target.value === userPassword) {
-                setPwConfirmValid(true);
-            }else{
+            if(e.target.value !== userPassword) {
                 setPwConfirmValid(false);
+            }else{
+                setPwConfirmValid(true);
             }
         }
 
+        
 
-        useEffect(() => {
+        useEffect((e) => {
             if(idVaild && pwVaild && pwConfirmVaild && nameVaild)  {
-                setAllowLogin(false);
+                setAllowSignUp(false);
                 return;
             }
-            setAllowLogin(true);
+            setAllowSignUp(true);
     
         },[idVaild,pwVaild,pwConfirmVaild,nameVaild]);
 
+
+        useEffect((e) => {
+            if(idVaild) {
+                setAllowDuplicateId(false);
+                return;
+            }
+            setAllowDuplicateId(true);
+        },[idVaild]);
+
+        useEffect((e) => {
+            if(nameVaild) {
+                setAllowDuplicateName(false);
+                return;
+            }
+            setAllowDuplicateName(true);
+        },[nameVaild]);
 
 
 
 
         const checkDuplicateId = (e) => {
             e.preventDefault();
-            
-
             axios.get('http://52.79.209.184:8080/signup/checkDuplicateId',  {
                 params : {userId : userId}
             },{
@@ -115,7 +152,7 @@ function Signup() {
                 if(res.data.isDuplicated === true){ // 아이디가 중복이면
                     setIsCheckIdFirst(false);
                     setIsDuplicateId(false);
-                
+                    
                 } else {
                     setIsCheckIdFirst(true);
                     setIsDuplicateId(true);
@@ -130,7 +167,6 @@ function Signup() {
 
         const checkDuplicateName = (e) => {
             e.preventDefault();
-
             axios.get('http://52.79.209.184:8080/signup/checkDuplicateName',  {
                 params : {userName : userName}
             },{
@@ -195,11 +231,11 @@ function Signup() {
 
   return (
 
-    <Form className="formSignUp" >
+    <Form ounsubmit="return false" className="formSignUp" >
         <Form.Label className="titleSignUp">Sign Up</Form.Label>
       <Form.Group className="mb-4" controlId="formUserId">
         <Form.Label>아이디</Form.Label>
-        <button className='btnDuplicateId' onClick={checkDuplicateId}>중복확인</button>
+        <button className='btnDuplicateId' onClick={checkDuplicateId} disabled={allowDuplicateId}>중복확인</button>
         
 
 
@@ -210,7 +246,7 @@ function Signup() {
             maxLength="19"
             onChange={handleId}
             onKeyUp={handleOnKeyId}
-            onKeyDown={handleOnKeyId}
+            onKeyDown={handleKeyDown}
             />
 
             
@@ -218,7 +254,7 @@ function Signup() {
                 {
                     !idVaild && userId.length > 0 ? <p>영문,숫자 포함 5자 이상 입력해주세요</p> : 
                     !isDuplicateId && !isCheckIdFirst ? <p> 이미 사용중인 아이디 입니다.</p> :
-                    isDuplicateId && isCheckIdFirst ? <p style={{color:'green'}}>사용 가능한 아이디 입니다.</p> :
+                    isDuplicateId && isCheckIdFirst && userId !== null ? <p style={{color:'green'}}>사용 가능한 아이디 입니다.</p> :
 	                null
                 }
             </div>
@@ -231,21 +267,21 @@ function Signup() {
 
       <Form.Group className="mb-4" controlId="formUserName">
         <Form.Label>닉네임</Form.Label>
-        <button className='btnDuplicateName' onClick={checkDuplicateName} >중복확인</button>
+        <button className='btnDuplicateName' onClick={checkDuplicateName} disabled={allowDuplicateName} >중복확인</button>
         <Form.Control className="inputSignUp"
             type="text"
             placeholder="닉네임을 입력해주세요."
             value={userName}
             maxLength="9"
             onChange={handleName}
-            onKeyDown={handleOnKeyName}
+            onKeyDown={handleKeyDown}
             onKeyUp={handleOnKeyName} />
             
             <div className='errorSignUp'>
                 {
                     !nameVaild && ( userName.length > 0 ) ? <p>2자 이상 입력해주세요.</p> :
                     !isCheckNameFirst && !isDuplicateName ? <p> 이미 사용중인 닉네임 입니다.</p> :
-                    isCheckNameFirst && isDuplicateName ? <p style={{color:'green'}}>사용 가능한 닉네임 입니다.</p> :
+                    isCheckNameFirst && isDuplicateName && userName !== null ? <p style={{color:'green'}}>사용 가능한 닉네임 입니다.</p> :
 	                null
                 }
             </div>
@@ -260,12 +296,13 @@ function Signup() {
             type="password"
             placeholder="영문,숫자,특수문자 포함 8자 이상 입력해주세요."
             value={userPassword}
-            
+            onKeyDown={handleKeyDown}
+            onKeyUp={handleOnKeyPw}
             onChange={handlePw}/>
             <div className="errorSignUp">
                  {
                    !pwVaild && userPassword.length > 0 && (
-                     <div>영문,숫자,특수문자 포함 8자 이상 입력해주세요.</div>
+                     <div>영문,숫자,특수문자 포함 8~20자 이내로 입력해주세요.</div>
                  )
                 }
                         </div>
@@ -277,16 +314,17 @@ function Signup() {
             placeholder="비밀번호 확인을 위해 한번 더 입력해주세요."
             value={userPasswordConfirm}
             
-            onChange={handlePwConfirm}/>
+            onChange={handlePwConfirm}
+            onKeyDown={handleKeyDown}/>
             <div className="errorSignUp">
                  {
-                    !pwConfirmVaild && userPasswordConfirm.length > 0 && userPassword !== userPasswordConfirm &&(
+                    !pwConfirmVaild && userPassword !== userPasswordConfirm && userPasswordConfirm.length > 0  && (
                      <div>비밀번호가 맞지않습니다.</div>
                  )
                 }
                         </div>
       </Form.Group>
-      <Button className="btnSignUp" variant="primary" type="submit" disabled={allowLogin}
+      <Button className="btnSignUp" variant="primary" type="submit" disabled={allowSignUp}
             onClick={submitHandler}> Sign Up </Button>
     </Form>
   );

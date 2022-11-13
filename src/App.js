@@ -22,7 +22,6 @@ import PublicRoute from './component/PublicRoute';
 function App() {
 
 
-
   return (
     <RecoilRoot><BrowserRouter>
     <Navbar />

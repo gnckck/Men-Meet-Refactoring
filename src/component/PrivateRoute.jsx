@@ -7,7 +7,7 @@ import { loginState } from './State';
     const login = useRecoilValue(loginState);
 
         return (
-        login ? component : <Navigate to="/login" /> 
+        login === true ? component : <Navigate to="/login" /> 
    
         )}
 

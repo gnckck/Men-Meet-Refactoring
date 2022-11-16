@@ -14,14 +14,14 @@
     max-width: 1060px;
     padding : 0 20px;
     border-style:solid;
-    border-color: aqua;
+    border-color: rgb(152, 206, 236);
     border-width: 2px;
     left : 50%;
     transform: translate(-50%, 0);
   
     background-color : white;
     border-radius: 3em;
-    box-shadow:  0 0.188em 1.550em rgb(156,156,156);
+    box-shadow:  0 0.188em 1.550em rgb(168, 166, 166);
     overflow: hidden;
     display:flex;
     flex-direction: column;

@@ -8,7 +8,7 @@ import Signup from './component/Signup';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Users from './pages/Users';
 import Mypage from './component/Mypage';
-import Mentoring from './component/Mentoring';
+import Mentoring from './component/Board/Mentoring';
 import Program from './component/Program';
 import { RecoilRoot } from 'recoil';
 import PrivateRoute from './component/PrivateRoute';

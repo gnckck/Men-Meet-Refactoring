@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
+
+
 function Signup() {
 
 
@@ -47,7 +49,8 @@ function Signup() {
             setUserPassword(e.target.value);
             if(e.target.value !== userPasswordConfirm){
                 setPwConfirmValid(false);
-                
+            }else{
+                setPwConfirmValid(true);
             }
         }
 
@@ -210,14 +213,13 @@ function Signup() {
                                 },
             }
         )
-            .then((response) => {
-                    console.log(response);
-
+            .then((res) => {
+                    console.log(res);
                     console.log("회원가입에 성공했습니다.");
                     alert("회원가입에 성공했습니다.");
                     navigate("/login")
             }).catch((error) => {
-                console.log('회원가입에 실패했습니다.',error.response);
+                console.log('회원가입에 실패했습니다.',error.res);
                 alert("회원가입에 실패했습니다. 다시 시도해주세요.");
             })
             }else if(isCheckIdFirst === false){

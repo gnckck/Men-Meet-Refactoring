@@ -1,0 +1,55 @@
+.MentoringBoard {
+    margin-top: 100px;
+}
+
+.selectCategory {
+    width: 120px;
+    height: 30px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+}
+
+.boardWrite {
+    margin-left: 25px;
+    width : 80px;
+    height : 30px;
+    border-radius: 2px;
+    border: none;
+    background-color: rgb(218, 220, 221);
+}
+
+
+.ipSearch {
+    margin-left: 620px;
+}
+
+.btnSearch {
+    border:none;
+    padding:3px;
+    width: 35px;
+    height: 31px;
+}
+
+.boardSelectMento {
+    margin-top: 10px;
+    margin-bottom: 12px;
+}
+
+.boardMento {
+    width: 100px;
+    height: 45px;
+    border: none;
+    margin-right: 3px;
+    border-radius: 10px;
+    background-color: rgb(151, 197, 235);
+    color: white;
+}
+
+.boardMenti {
+    width: 100px;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(151, 197, 235);
+    color: white;
+}

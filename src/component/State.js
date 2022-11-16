@@ -11,6 +11,8 @@ export const loginState = atom({
 
 });
 
+
+
 export const userState = atom ({
     key : 'userState',
     default : '',
@@ -18,7 +20,9 @@ export const userState = atom ({
 
 });
 
+export const modalState = atom ({
+    key : 'modalState',
+    default : false,
+    effects_UNSTABLE: [persistAtom],
 
-
-
-
+});

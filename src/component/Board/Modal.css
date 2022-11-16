@@ -48,23 +48,41 @@
 }
 
 .modalTitle {
-  margin-top: 15px;
+  margin-top: 10px;
+  width: 437px;
+  height : 35px;
 }
 
 .modalContent {
-  margin-top: 7px;
+  margin-top:7px;
+  width: 437px;
+  height : 260px;
 }
 
 .modalSubmit{
-  margin-top: 3em;
-  border-radius: 3px;
-  background-color: rgb(180, 214, 235);
-  color :white;
-  border: none;
-  width: 100px;
-  height: 40px;
+      
+    border : none;
+    width : 120px;
+    height : 3em;
+    color: white;
+    background-color: rgb(32,177,255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    border-radius: 0.25em;
+    margin-top: 40px;
+    margin-left:9em;
 }
 
+.modalSubmit:disabled {
+  background-color: rgb(180, 214, 235);
+  color :white;
+}
+
+.modalSubmit:hover {
+  transform: scale(1.08);
+}
 
 .modalP {
   width: 318px;

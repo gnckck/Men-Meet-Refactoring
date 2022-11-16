@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
-import { loginState, userState} from './State';
+import { IdState, loginState, userState} from './State';
 
 
 
@@ -21,6 +21,7 @@ export default function Login() {
 
     const setLogin = useSetRecoilState(loginState);
     const setUser = useSetRecoilState(userState);
+    const setId = useSetRecoilState(IdState);
 
 
 
@@ -81,6 +82,7 @@ export default function Login() {
             if(res.data.isLoginConfirmed === true){
             setLogin(true);
             setUser(res.data.userName);
+            setId(res.data.userId);
             alert((res.data.userName) + `님 Men-Meet에 어서오세용~!`)
             navigate("/");}
             else{

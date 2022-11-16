@@ -36,7 +36,7 @@ function Mentoring() {
 
 
     useEffect(() => {
-      axios.post("http://52.79.209.184:8080//mentoringPost/",{
+      axios.post("http://52.79.209.184:8080/mentoringPost/",{
         category : "",
         isMentor : "",
         pageNum : "",
@@ -109,7 +109,7 @@ function Mentoring() {
             <tbody>
               {postList.map((post) => {
                 return(
-                <tr key = {post.postWriterName}>
+                <tr key = {post.postNum}>
                 <td>{post.postNum}</td>
                 <td>{post.postTitle}</td>
                 <td>{post.mentoringEnable}</td>

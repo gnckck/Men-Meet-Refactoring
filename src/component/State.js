@@ -20,6 +20,13 @@ export const userState = atom ({
 
 });
 
+export const IdState = atom ({
+    key : 'IdState',
+    default : '',
+    effects_UNSTABLE: [persistAtom],
+
+}); 
+
 export const modalState = atom ({
     key : 'modalState',
     default : false,

@@ -31,8 +31,8 @@ function Modal() {
 
     const userId = useRecoilValue(IdState);
     const userName = useRecoilValue(userState);
-    const writeTime = moment().format('YYYY-MM-DD hh:mm');
-    const mentoringTime = moment(startDate).format('YYYY-MM-DD hh:mm');
+    const writeTime = moment().format('YYYY-MM-DD hh:mm:ss');
+    const mentoringTime = moment(startDate).format('YYYY-MM-DD hh:mm:ss');
     
         
     const isModal = () => {
@@ -84,39 +84,40 @@ function Modal() {
   }},[titleValid,contentValid]);  
 
   console.log(
-    userId,
-    userName,
-    category,
-    isMento,
-    title,
-    content,
-    postEnable,
-    writeTime,
-    mentoringTime
+    "writerId :",userId,
+    " writerName:",userName,
+    "category:",category,
+    "mentoringTarget:",isMento,
+    "title:",title,
+    "content:",content,
+    "mentoringEnable:",postEnable,
+    "postingTime:",writeTime,
+    "mentoringTime:",mentoringTime
   );
 
 
 
     const handleSubmit =() =>{
-    axios.post("http://52.79.209.184:8080/mentoringPost/createPost",{
+    axios.post("http://52.79.209.184:8080/mentoringPost/createPost", {
         postNum : "",
-        writerId : {userId},
-        writerName : {userName},
-        category : {category},
-        mentoringTarget : {isMento},
-        title : {title},
-        content : {content},
-        mentoringEnable : {postEnable},
-        postingTime : {writeTime},
-        mentoringTime : {mentoringTime},
+        writerId : userId,
+        writerName : userName,
+        category : category,
+        mentoringTarget : isMento,
+        title : title,
+        content : content,
+        mentoringEnable : postEnable,
+        postingTime : writeTime,
+        mentoringTime : mentoringTime,
       },{
         headers : { "Content-Type": `application/json`, },
        }).then((res) => {
         console.log(res);
         setPostEnable("0");
+        alert("게시물이 등록되었습니다.");
        })
         .catch((error) => {
-        console.log("에러",error.response);
+        console.log(error.response);
       })
     }
 
@@ -161,7 +162,7 @@ function Modal() {
                 onChange={(date) => setStartDate(date)}
                 locale={ko}                   // 한글로 변경
                 timeFormat="HH:mm" //시간 포맷 
-                dateFormat="yyyy-MM-dd hh:mm" // 시간 포맷 변경
+                dateFormat="yyyy-MM-dd (eee) hh:mm" // 시간 포맷 변경
                 showTimeSelect
                 placeholderText="날짜를 선택해주세요."
                 showPopperArrow={false}       // 화살표 변경

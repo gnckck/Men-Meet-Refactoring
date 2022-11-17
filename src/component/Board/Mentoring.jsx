@@ -47,7 +47,7 @@ function Mentoring() {
          setPostList(res.data);
        })
         .catch((error) => {
-        console.log(error.response);
+        console.log(error.res);
       })
     },[]);
   

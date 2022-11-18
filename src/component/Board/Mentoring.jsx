@@ -10,6 +10,8 @@ import { FcSearch } from "react-icons/fc";
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BsSuitHeartFill } from "react-icons/bs";
+import { BsSuitHeart } from "react-icons/bs";
 
 
 
@@ -72,8 +74,7 @@ function Mentoring() {
     <form className="MentoringBoard">
     <div className="container max-w-screen-lg mx-auto">
       <div className="boardHeader">
-      <button className='boardMento'>Mento</button>
-      <button className='boardMenti'>Menti</button>
+      
       <select className='selectCategory'>
           <option key="all">전체</option>
           <option key="major">전공</option>
@@ -83,6 +84,11 @@ function Mentoring() {
           <option key="other">기타</option>
       </select>
 
+      <select className='selectMento'>
+        <option >Mento</option>
+        <option >Menti</option>
+      </select>
+      
       <input type="text" className='ipSearch' />
       <button className='btnSearch'><FcSearch size="20"/></button>
 
@@ -112,7 +118,10 @@ function Mentoring() {
                 <tr key = {post.postNum}>
                 <td>{post.postNum}</td>
                 <td>{post.postTitle}</td>
-                <td>{post.mentoringEnable}</td>
+                <td>
+                  {post.mentoringEnable === true ? <BsSuitHeart color='lightblue'/> :
+                   <BsSuitHeartFill color='lightblue' /> } 
+                </td>
                 <td>{post.postWriterName}</td>
                 <td>{post.postWriteTime}</td>
               </tr>

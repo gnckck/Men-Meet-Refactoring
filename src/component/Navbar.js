@@ -1,7 +1,7 @@
 import './Navbar.css';
 import { Link, useNavigate } from "react-router-dom"
-import { useRecoilState } from "recoil";
-import { loginState, userState } from './State';
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { loginState, userState, IdState } from './State';
 import axios from "axios";
 
 
@@ -9,6 +9,7 @@ const Navbar = () => {
 
     const [login, setLogin] = useRecoilState(loginState);
     const [user, setUser] = useRecoilState(userState);
+    const setUserId = useSetRecoilState(IdState);
     
     const navigate = useNavigate();
 
@@ -27,7 +28,8 @@ const Navbar = () => {
                 setLogin(true);
             }else{
                 setLogin(false);
-                setUser(null);
+                setUser("");
+                setUserId("");
                 alert('로그아웃 되었습니다.');
                 navigate('/login');
             }

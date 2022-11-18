@@ -6,7 +6,8 @@
     width: 120px;
     height: 30px;
     margin-bottom: 15px;
-    margin-left: 20px;
+    border-color: lightblue;
+    color: rgb(86, 133, 204);
 }
 
 .boardWrite {
@@ -15,7 +16,8 @@
     height : 30px;
     border-radius: 2px;
     border: none;
-    background-color: rgb(218, 220, 221);
+    background-color: lightblue;
+    color: white;
 }
 
 
@@ -30,26 +32,15 @@
     height: 31px;
 }
 
-.boardSelectMento {
-    margin-top: 10px;
-    margin-bottom: 12px;
+.selectMento {
+    width: 125px;
+    height: 30px;
+    margin-left: 25px;
+    border-radius: 3px;
+    border-color: lightblue;
+    color: rgb(86, 133, 204);
 }
 
-.boardMento {
-    width: 100px;
-    height: 45px;
-    border: none;
-    margin-right: 3px;
-    border-radius: 10px;
-    background-color: rgb(151, 197, 235);
-    color: white;
-}
-
-.boardMenti {
-    width: 100px;
-    height: 45px;
-    border: none;
-    border-radius: 10px;
-    background-color: rgb(151, 197, 235);
-    color: white;
+.boardPage {
+    margin-top: 5em;
 }

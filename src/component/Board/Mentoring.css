@@ -44,3 +44,7 @@
 .boardPage {
     margin-top: 5em;
 }
+
+.postTitle {
+    cursor: pointer ;
+}

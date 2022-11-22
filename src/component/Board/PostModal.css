@@ -1,0 +1,47 @@
+.PostModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+   
+  /* modal창 */
+  .postModalBody {
+    position: absolute;
+    width: 520px;
+    height: 700px;
+    padding: 40px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+  }
+  
+  #postModalCloseBtn{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+    color: rgba(0, 0, 0, 0.7);
+    background-color: transparent;
+    font-size: 20px;
+  }
+  
+  #postmodalCloseBtn:hover {
+    cursor: pointer;
+  }
+  
+  .postModalTitle {
+    font-size: 25px;
+  }
+
+  .postModalProper {
+    margin-right: 360px;
+    font-size: 17px;
+  }
+

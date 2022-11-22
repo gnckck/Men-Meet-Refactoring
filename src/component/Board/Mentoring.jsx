@@ -3,28 +3,37 @@ import './Paging.css';
 import { Table } from 'react-bootstrap';
 import Pagination from 'react-js-pagination';
 import { useState } from 'react';
-import { loginState, modalState } from '../State';
+import { loginState, modalState, PostModalState } from '../State';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import Modal from './Modal';
+import PostModal from './PostModal';
 import { FcSearch } from "react-icons/fc";
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BsSuitHeartFill } from "react-icons/bs";
-import { BsSuitHeart } from "react-icons/bs";
-
+import { BsSuitHeart } from "react-icons/bs"
 
 
 
 function Mentoring() {
 
+    
 
     const login = useRecoilValue(loginState);
     
     const navigate = useNavigate();
 
     const [page, setPage] = useState(1);
+    const [category, setCategory] = useState("");
+    const [mentoCategory, setMentoCategory] = useState("");
+    const [keyword, setKeyword] = useState("");
+    const [search, setSearch] = useState("");
     const [modalOpen, setModalOpen] = useRecoilState(modalState);
+    const [PostModalOpen, setPostModalOpen] = useRecoilState(PostModalState);
+    const [postTotal, setPostTotal] = useState(0);
+    
+
     const [postList, setPostList] = useState([{
       postNum:"",
       postTitle:"",
@@ -37,12 +46,40 @@ function Mentoring() {
   }]);
 
 
-    useEffect(() => {
+    const handlePageChange = (page) => {
+    setPage(page);
+    };
+
+    const onCategoryChange = (e) => {
+      const {value} = e.target
+      setCategory(value)
+    }
+
+    const onMentoCategoryChange = (e) => {
+      const {value} = e.target
+      setMentoCategory(value)
+    }
+
+    const handleKeyword = (e) => {
+      e.preventDefault();
+      setKeyword(e.target.value);
+    } 
+
+    const handleSearch = (e) => {
+      e.preventDefault();
+      setSearch(keyword);
+    }
+  
+
+    
+
+
+      useEffect(() => {
       axios.post("http://52.79.209.184:8080/mentoringPost/",{
-        category : "",
-        isMentor : "",
-        pageNum : "",
-        keyword : "",
+        category : category,
+        isMentor : mentoCategory,
+        pageNum : page,
+        keyword : search,
       },{
         headers : { "Content-Type": `application/json`, },
        }).then((res) => {
@@ -51,15 +88,13 @@ function Mentoring() {
         .catch((error) => {
         console.log(error.res);
       })
-    },[]);
+    },[category,mentoCategory,page,search]);
   
-
-    const handlePageChange = (page) => {
-      setPage(page);
-      };
+    
 
 
-      const handleModal = () => {
+      const handleModal = (e) => {
+        e.preventDefault();
         if(login === true){
           setModalOpen(true);
         }else{
@@ -68,35 +103,53 @@ function Mentoring() {
         navigate("/login");
       }}
 
-    
+      const handlePostModal = () => {
+        if(login === true){
+          setPostModalOpen(true);
+        }else{
+          setPostModalOpen(false);
+        alert('로그인 후 이용해주세요.');
+        navigate("/login");
+      }}
+
+
+      useEffect(() => {
+      axios.post("http://52.79.209.184:8080/mentoringPost/postCount",{
+      },{
+        headers : { "Content-Type": `application/json`, },
+      }).then((res) => {
+        setPostTotal(res.data.total_count);
+      })
+    },[])
+
 
   return(
     <form className="MentoringBoard">
     <div className="container max-w-screen-lg mx-auto">
       <div className="boardHeader">
       
-      <select className='selectCategory'>
-          <option key="all">전체</option>
-          <option key="major">전공</option>
-          <option key="future">진로</option>
-          <option key="love">연애</option>
-          <option key="school">학교생활</option>
-          <option key="other">기타</option>
+      <select  className='selectCategory' value={category} onChange={onCategoryChange}>
+                <option value="">전체</option>
+                <option value='0'>전공</option>
+                <option value='1'>진로</option>
+                <option value='2'>연애</option>
+                <option value='3'>학교생활</option>
+                <option value='4'>기타</option>
+            </select>
+
+      <select className='selectMento' value={mentoCategory} onChange={onMentoCategoryChange}>
+        <option value="">구분없음</option>
+        <option value='0' >Menti</option>
+        <option value='1'>Mento</option>
       </select>
 
-      <select className='selectMento'>
-        <option >Mento</option>
-        <option >Menti</option>
-      </select>
-      
-      <input type="text" className='ipSearch' />
-      <button className='btnSearch'><FcSearch size="20"/></button>
+      <input type="text" className='ipSearch' onChange={handleKeyword} />
+      <button className='btnSearch' onClick={handleSearch}><FcSearch size="20"/></button>
 
 
       <button className='boardWrite' onClick={handleModal}> 글쓰기 </button>
       {modalOpen && (
         <Modal closeModal={() => setModalOpen(!modalOpen)}>
-        <h1>hello</h1>
         </Modal>
       )}
 
@@ -112,12 +165,18 @@ function Mentoring() {
                 <th>작성일</th>
               </tr>
             </thead>
+            
             <tbody>
+              
               {postList.map((post) => {
                 return(
                 <tr key = {post.postNum}>
                 <td>{post.postNum}</td>
-                <td>{post.postTitle}</td>
+                <td className='postTitle'
+                    onClick={handlePostModal}   
+                >
+                  {post.postTitle}
+                </td>
                 <td>
                   {post.mentoringEnable === true ? <BsSuitHeart color='lightblue'/> :
                    <BsSuitHeartFill color='lightblue' /> } 
@@ -129,12 +188,19 @@ function Mentoring() {
               })}
                 
             </tbody>
+            
           </Table>
+         
+                {PostModalOpen && (
+                   <PostModal closePostModal={() => setPostModalOpen(!PostModalOpen)}>
+                   </PostModal>
+                )}
+          
         <div className="boardPage">
         <Pagination
           activePage={page}
           itemsCountPerPage={10}
-          totalItemsCount={450}
+          totalItemsCount={postTotal}
           pageRangeDisplayed={5}
           prevPageText={"‹"}
           nextPageText={"›"}
@@ -143,7 +209,10 @@ function Mentoring() {
       </div>
     </div>
     </form>
+
   )
 }
+
+
 
 export default Mentoring;

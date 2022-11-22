@@ -83,18 +83,6 @@ function Modal() {
 
   }},[titleValid,contentValid]);  
 
-  console.log(
-    "writerId :",userId,
-    " writerName:",userName,
-    "category:",category,
-    "mentoringTarget:",isMento,
-    "title:",title,
-    "content:",content,
-    "mentoringEnable:",postEnable,
-    "postingTime:",writeTime,
-    "mentoringTime:",mentoringTime
-  );
-
 
 
     const handleSubmit =() =>{

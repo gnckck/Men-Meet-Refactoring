@@ -14,7 +14,9 @@
 
 # API
 
-![image](https://user-images.githubusercontent.com/101711121/201865289-03731c09-63d5-4253-a6f7-d3fc074a7287.png)
+![image](https://user-images.githubusercontent.com/101711121/204150784-e69e9be2-47d8-4492-bbe3-67a3e0a5d227.png)
+![image](https://user-images.githubusercontent.com/101711121/204150805-7d092480-99bf-4c52-9498-38e092abf614.png)
+
 
 
 # Architecture

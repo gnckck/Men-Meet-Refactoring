@@ -16,7 +16,7 @@
     width: 520px;
     height: 700px;
     padding: 40px;
-    text-align: center;
+    text-align: left;
     background-color: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
@@ -37,11 +37,63 @@
   }
   
   .postModalTitle {
+    margin-left: 120px;
     font-size: 25px;
   }
 
-  .postModalProper {
-    margin-right: 360px;
+  .postModalProper{
+    margin-top: 12px;
+    width: 100%;
     font-size: 17px;
   }
 
+  .postModaltitle {
+    
+    height: 25px;
+  }
+
+  .postModalcontent {
+    width: 100%;
+    height: 250px;
+    margin-top: 20px;
+  }
+
+  .reBtn {
+    border: none;
+    width: 120px;
+    height: 50px;
+    border-radius: 5px;
+    margin-top: 40px;
+    margin-left: 100px;
+    margin-right: 10px;
+    background-color: rgb(171, 223, 247);
+    border-color: #f1c40f;
+    color: white;
+    background-image: linear-gradient(45deg, #42a5f7 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    transition: background 300ms ease-in-out;
+    }
+
+  .reBtn:hover {
+    background-position: 0;
+  }
+
+
+  .moBtn {
+    border: none;
+    width: 120px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: rgb(171, 223, 247);
+    border-color: #f1c40f;
+    color: white;
+    background-image: linear-gradient(45deg, #42a5f7 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    transition: background 300ms ease-in-out;
+    }
+
+  .moBtn:hover {
+    background-position: 0;
+  }

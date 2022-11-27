@@ -3,8 +3,8 @@ import './Paging.css';
 import { Table } from 'react-bootstrap';
 import Pagination from 'react-js-pagination';
 import { useState } from 'react';
-import { loginState, modalState, PostModalState } from '../State';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { loginState, modalState, PostModalState, postState } from '../State';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import Modal from './Modal';
 import PostModal from './PostModal';
 import { FcSearch } from "react-icons/fc";
@@ -32,6 +32,8 @@ function Mentoring() {
     const [modalOpen, setModalOpen] = useRecoilState(modalState);
     const [PostModalOpen, setPostModalOpen] = useRecoilState(PostModalState);
     const [postTotal, setPostTotal] = useState(0);
+    const setPostData = useSetRecoilState(postState);
+
     
 
     const [postList, setPostList] = useState([{
@@ -44,6 +46,8 @@ function Mentoring() {
       mentoringEnable:"",
       postWriteTime:"",
   }]);
+
+    
 
 
     const handlePageChange = (page) => {
@@ -60,6 +64,7 @@ function Mentoring() {
       setMentoCategory(value)
     }
 
+
     const handleKeyword = (e) => {
       e.preventDefault();
       setKeyword(e.target.value);
@@ -69,8 +74,8 @@ function Mentoring() {
       e.preventDefault();
       setSearch(keyword);
     }
-  
 
+    
     
 
 
@@ -92,7 +97,6 @@ function Mentoring() {
   
     
 
-
       const handleModal = (e) => {
         e.preventDefault();
         if(login === true){
@@ -103,14 +107,6 @@ function Mentoring() {
         navigate("/login");
       }}
 
-      const handlePostModal = () => {
-        if(login === true){
-          setPostModalOpen(true);
-        }else{
-          setPostModalOpen(false);
-        alert('로그인 후 이용해주세요.');
-        navigate("/login");
-      }}
 
 
       useEffect(() => {
@@ -122,6 +118,7 @@ function Mentoring() {
       })
     },[])
 
+    
 
   return(
     <form className="MentoringBoard">
@@ -142,7 +139,6 @@ function Mentoring() {
         <option value='0' >Menti</option>
         <option value='1'>Mento</option>
       </select>
-
       <input type="text" className='ipSearch' onChange={handleKeyword} />
       <button className='btnSearch' onClick={handleSearch}><FcSearch size="20"/></button>
 
@@ -152,7 +148,7 @@ function Mentoring() {
         <Modal closeModal={() => setModalOpen(!modalOpen)}>
         </Modal>
       )}
-
+      
 
       </div>
           <Table>
@@ -170,10 +166,24 @@ function Mentoring() {
               
               {postList.map((post) => {
                 return(
-                <tr key = {post.postNum}>
+                <tr  key = {post.postNum}>
                 <td>{post.postNum}</td>
                 <td className='postTitle'
-                    onClick={handlePostModal}   
+                    
+                    onClick={(e)=> {
+                      if(login === true){
+                        setPostModalOpen(true);
+                        axios.get(`http://52.79.209.184:8080/mentoringPost/showPost/${post.postNum}`)
+                        .then((res) => {
+                        setPostData(res.data);
+                      })
+                      }else{
+                        setPostModalOpen(false);
+                        alert('로그인 후 이용해주세요.');
+                        navigate("/login");
+                        
+                    }
+                      }}
                 >
                   {post.postTitle}
                 </td>
@@ -184,6 +194,7 @@ function Mentoring() {
                 <td>{post.postWriterName}</td>
                 <td>{post.postWriteTime}</td>
               </tr>
+              
                 )
               })}
                 
@@ -209,7 +220,7 @@ function Mentoring() {
       </div>
     </div>
     </form>
-
+    
   )
 }
 

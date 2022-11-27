@@ -1,12 +1,15 @@
 import './PostModal.css';
-import { useSetRecoilState } from 'recoil';
-import { PostModalState } from '../State';
+import {  useRecoilValue, useSetRecoilState } from 'recoil';
+import { PostModalState, postState } from '../State';
 import  {FcSurvey} from 'react-icons/fc';
+
 
 
 function PostModal() {
 
     const setCloseModal = useSetRecoilState(PostModalState);
+    const postData = useRecoilValue(postState);
+    
 
 
     const isModal = () => {
@@ -16,24 +19,30 @@ function PostModal() {
 
 
 
+
     return (
+      
         <div className="PostModal" >
           <div className="postModalBody" onClick={(e) => e.stopPropagation()}>
             <button id="postModalCloseBtn" onClick={isModal}>
               ✖
             </button>
-            <p className="postModalTitle">< FcSurvey size="30" /> 멘토링 게시글</p><br />
-            <p className="postModalProper"> 카테고리 : </p>
-            <p className="postModalProper"> 멘토구분 : </p>
+            <div className="postModalTitle">< FcSurvey size="30" /> 멘토링 게시글</div><br />
+            <div className="postModalProper"> <b> 카테고리 </b> : {postData.category === 0 ? "전공" :
+                                                                  postData.category === 1 ? "진로" :
+                                                                  postData.category === 2 ? "연애" :
+                                                                  postData.category === 3 ? "학교생활" :
+                                                                  postData.category === 4 ? "기타" : null} </div>
             <hr />
-            <p>제목</p>
+            <div className="postModaltitle"><b>제목</b> : {postData.title}</div>
             <hr />
-            <p>내용</p><hr />
-            <p>멘토링 시간 :</p>
-            <button>신청하기</button>
-            <button>수정하기</button>
+            <div className="postModalcontent">{postData.content}</div><hr />
+            <div className="postModaltime"><b>멘토링 시간</b> : {postData.mentoringTime}</div>
+            <button className="reBtn">신청하기</button>
+            <button className="moBtn">수정하기</button>
             </div>
         </div>
+      
     )
 
 }

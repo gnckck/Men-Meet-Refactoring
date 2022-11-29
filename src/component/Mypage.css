@@ -1,0 +1,97 @@
+.postit {
+    background: #fff;
+    width: 600px;
+    height: 300px;
+    margin: 60px auto;
+    padding: 10px;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    color: #424242;
+  }
+
+  .yellow{background: #FFF9C4;}
+  .blue{background: #E3F2FD;}
+  .pink{background: #FCE4EC;}
+  .green{background: #DCEDC8;}
+
+  .tape {
+    margin: -30px auto 10px;
+    width: 200px;
+    height: 40px;
+    background: rgba(255,255,200,0.4);
+    -webkit-box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.4);
+    text-align: center;
+    line-height: 40px;
+    font-weight: bold;
+    color: #555554;
+
+  }
+
+  .left{
+    float: left;
+    margin-left: 320px;
+    margin-top: 45px;
+  }
+
+  .right{
+    float: right;
+    margin-right: 320px;
+    margin-top: 45px;
+  }
+
+  .widget-content{
+
+    margin-top: 50px;
+    margin-left: 15px;
+  }
+
+  .trPwd{
+    text-decoration: underline;
+  }
+
+  .trPwd:hover{
+    cursor: pointer;
+  }
+
+  .witUser{
+    text-decoration: underline;
+    color:red;
+  }
+
+  .witUser:hover{
+    cursor: pointer;
+  }
+
+  .writePost{
+    height: 270px;
+    margin-left: 15px;
+    overflow: auto;
+  }
+
+  .reservationContent{
+    text-align: center;
+    width: 580px;
+    height: 270px;
+    overflow: auto;
+    white-space: nowrap;
+    margin-left: 5px;
+    margin-top: 20px;
+  }
+
+  .apply {
+    text-align: center;
+    margin-top: 20px;
+    width: 550px;
+    overflow: auto;
+    white-space: nowrap;
+  }
+
+
+
+
+
+
+
+
+  

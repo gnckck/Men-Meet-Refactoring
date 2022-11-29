@@ -48,5 +48,12 @@ export const postState = atom({
 
 });
 
+export const reservationState = atom({
+    key : 'reservationState',
+    default : "",
+    effects_UNSTABLE: [persistAtom],
+
+});
+
 
  

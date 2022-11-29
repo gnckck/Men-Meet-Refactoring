@@ -102,11 +102,9 @@ function Modal() {
        }).then((res) => {
         console.log(res);
         setPostEnable("0");
-        alert("게시물이 등록되었습니다.");
+        setCloseModal(false);
        })
-        .catch((error) => {
-        console.log(error.response);
-      })
+        alert("게시글이 등록되었습니다.")
     }
 
   

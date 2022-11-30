@@ -14,8 +14,9 @@
 
 # API
 
-![image](https://user-images.githubusercontent.com/101711121/204150784-e69e9be2-47d8-4492-bbe3-67a3e0a5d227.png)
-![image](https://user-images.githubusercontent.com/101711121/204150805-7d092480-99bf-4c52-9498-38e092abf614.png)
+![image](https://user-images.githubusercontent.com/101711121/204721685-4fca8c7c-b90b-4c58-8a66-e1c3b67250d9.png)
+![image](https://user-images.githubusercontent.com/101711121/204721765-487ea10c-ae01-4a42-8736-2bdc88bad4aa.png)
+
 
 
 

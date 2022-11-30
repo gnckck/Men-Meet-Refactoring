@@ -56,20 +56,10 @@ function Mypage() {
         .then((res) =>{
             setWritePost(res.data);
         })
-
-    },[userId]);
-
-
-    useEffect(()=> {
         axios.get(`http://52.79.209.184:8080/myPage/myReservation/${userId}`)
         .then((res) =>{
             setReservationPost(res.data);
         })
-    },[userId]);
-
-
-
-    useEffect(()=> {
         axios.get(`http://52.79.209.184:8080/myPage/myAppliedMentoring/${userId}`)
         .then((res) =>{
             setApply(res.data);
@@ -78,8 +68,10 @@ function Mypage() {
         .then((res) =>{
             setRecApply(res.data);
         })
+
     },[userId]);
 
+    
     
 
    

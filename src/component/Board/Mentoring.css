@@ -5,7 +5,7 @@
 .selectCategory {
     width: 120px;
     height: 30px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     border-color: lightblue;
     color: rgb(86, 133, 204);
 }
@@ -22,7 +22,7 @@
 
 
 .ipSearch {
-    margin-left: 620px;
+    margin-left: 20px;
 }
 
 .btnSearch {
@@ -32,14 +32,7 @@
     height: 31px;
 }
 
-.selectMento {
-    width: 125px;
-    height: 30px;
-    margin-left: 25px;
-    border-radius: 3px;
-    border-color: lightblue;
-    color: rgb(86, 133, 204);
-}
+
 
 .boardPage {
     margin-top: 5em;

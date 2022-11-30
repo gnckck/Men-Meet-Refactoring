@@ -82,7 +82,8 @@
   .apply {
     text-align: center;
     margin-top: 20px;
-    width: 550px;
+    width: 580px;
+    height: 250px;
     overflow: auto;
     white-space: nowrap;
   }

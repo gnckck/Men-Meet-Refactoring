@@ -37,8 +37,13 @@ export const modalState = atom ({
 export const PostModalState = atom ({
     key : 'PostModalState',
     default : false,
-    
+    effects_UNSTABLE: [persistAtom],
+});
 
+export const ModifyModalState = atom ({
+    key : 'ModifyModalState',
+    default : false,
+    effects_UNSTABLE: [persistAtom],
 });
 
 export const postState = atom({

@@ -26,7 +26,6 @@ function Mentoring() {
 
     const [page, setPage] = useState(1);
     const [category, setCategory] = useState("");
-    const [mentoCategory, setMentoCategory] = useState("");
     const [keyword, setKeyword] = useState("");
     const [search, setSearch] = useState("");
     const [modalOpen, setModalOpen] = useRecoilState(modalState);
@@ -49,6 +48,8 @@ function Mentoring() {
 
     
 
+    
+
 
     const handlePageChange = (page) => {
     setPage(page);
@@ -57,11 +58,6 @@ function Mentoring() {
     const onCategoryChange = (e) => {
       const {value} = e.target
       setCategory(value)
-    }
-
-    const onMentoCategoryChange = (e) => {
-      const {value} = e.target
-      setMentoCategory(value)
     }
 
 
@@ -82,7 +78,7 @@ function Mentoring() {
       useEffect(() => {
       axios.post("http://52.79.209.184:8080/mentoringPost/",{
         category : category,
-        isMentor : mentoCategory,
+        isMentor : "",
         pageNum : page,
         keyword : search,
       },{
@@ -93,7 +89,7 @@ function Mentoring() {
         .catch((error) => {
         console.log(error.res);
       })
-    },[category,mentoCategory,page,search]);
+    },[category,page,search]);
   
     
 
@@ -134,11 +130,7 @@ function Mentoring() {
                 <option value='4'>기타</option>
             </select>
 
-      <select className='selectMento' value={mentoCategory} onChange={onMentoCategoryChange}>
-        <option value="">구분없음</option>
-        <option value='0' >Menti</option>
-        <option value='1'>Mento</option>
-      </select>
+      
       <input type="text" className='ipSearch' onChange={handleKeyword} />
       <button className='btnSearch' onClick={handleSearch}><FcSearch size="20"/></button>
 
@@ -158,6 +150,7 @@ function Mentoring() {
                 <th>제목</th>
                 <th>예약</th>
                 <th>작성자</th>
+                <th>구분</th>
                 <th>작성일</th>
               </tr>
             </thead>
@@ -167,7 +160,8 @@ function Mentoring() {
               {postList.map((post) => {
                 return(
                 <tr  key = {post.postNum}>
-                <td>{post.postNum}</td>
+                <td style={{color :'#337ab7'}}>{post.postNum}</td>
+                
                 <td className='postTitle'
                     
                     onClick={(e)=> {
@@ -192,6 +186,7 @@ function Mentoring() {
                    <BsSuitHeartFill color='lightblue' /> } 
                 </td>
                 <td>{post.postWriterName}</td>
+                <td>{post.postIsMentor === 0 ? "멘티" : "멘토"}</td>
                 <td>{post.postWriteTime}</td>
               </tr>
               

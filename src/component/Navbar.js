@@ -1,7 +1,7 @@
 import './Navbar.css';
 import { Link, useNavigate } from "react-router-dom"
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { loginState, userState, IdState } from './State';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { loginState, userState, IdState, DropModalState, ChangePwModalState } from './State';
 import axios from "axios";
 
 
@@ -12,6 +12,19 @@ const Navbar = () => {
     const setUserId = useSetRecoilState(IdState);
     
     const navigate = useNavigate();
+    const setCloseModal = useSetRecoilState(DropModalState);
+    const setClosePwModal = useSetRecoilState(ChangePwModalState);
+    const dropModal = useRecoilValue(DropModalState);
+    
+
+
+  const isModal = () => {
+    if(dropModal === true){
+      setCloseModal(false);
+    }else{
+    setClosePwModal(false);
+    }
+  }
 
 
 
@@ -46,7 +59,7 @@ const Navbar = () => {
     
     return (
 
-        <nav className="navbar navbar-expand-lg bg-light">
+        <nav className="navbar navbar-expand-lg bg-light" onClick={isModal}>
             <div className="container-fluid">
                 <Link className="navbar-brand" to="/">Men-Meet</Link>
                 <div className="nav justify-content-center" id="navbarNav">

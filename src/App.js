@@ -6,7 +6,7 @@ import Main from './component/Main';
 import Login from './component/Login';
 import Signup from './component/Signup';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Mypage from './component/Mypage';
+import Mypage from './component/Mypage/Mypage';
 import Mentoring from './component/Board/Mentoring';
 import Program from './component/Program';
 import { RecoilRoot } from 'recoil';

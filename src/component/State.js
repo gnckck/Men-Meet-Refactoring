@@ -46,6 +46,18 @@ export const ModifyModalState = atom ({
     effects_UNSTABLE: [persistAtom],
 });
 
+export const DropModalState = atom ({
+    key : 'DropModalState',
+    default : false,
+    effects_UNSTABLE: [persistAtom],
+});
+
+export const ChangePwModalState = atom ({
+    key : 'ChangePwModalState',
+    default : false,
+    effects_UNSTABLE: [persistAtom],
+});
+
 export const postState = atom({
     key : 'postState',
     default : "",

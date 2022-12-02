@@ -66,7 +66,7 @@ function ModifyModal() {
       const handleModify =(e) =>{
         e.preventDefault();
         axios.post("http://52.79.209.184:8080/mentoringPost/updatePost", {
-            postNum : "",
+            postNum : postData.postNum,
             writerId : userId,
             writerName : userName,
             category : category,

@@ -1,0 +1,162 @@
+.dropModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vh;
+    height: 475px;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+  }
+   
+  /* modal창 */
+  .dropModalBody {
+    position: absolute;
+    width: 600px;
+    height: 320px;
+    padding: 40px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    margin-left: 110px;
+  }
+
+  .changeModalBody{
+    position: absolute;
+    width: 600px;
+    height: 320px;
+    padding: 40px;
+    text-align: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
+    margin-left: 110px;
+  }
+   
+  #modalCloseBtn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: none;
+    color: rgba(0, 0, 0, 0.7);
+    background-color: transparent;
+    font-size: 20px;
+  }
+   
+  #modalCloseBtn:hover {
+    cursor: pointer;
+  }
+  
+  .dropWrite {
+    font-size: 25px;
+  }
+  
+  .drop_pw {
+    width: 350px;
+    height : 35px;
+  }
+  .change_pw {
+    width: 350px;
+    height : 35px;
+    margin-left: 60px;
+  }
+  .change_pwConfirm {
+    margin-top: 10px;
+    width: 350px;
+    height : 35px;
+  }
+  
+  .dropSubmit{
+        
+      border : none;
+      width : 120px;
+      height : 3em;
+      color: white;
+      background-color: rgb(245, 188, 197);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.5s;
+      border-radius: 0.25em;
+      margin-top: 25px;
+      margin-left:12.5em;
+  }
+
+  .changeSubmit{
+    border : none;
+      width : 120px;
+      height : 3em;
+      color: white;
+      background-color:  rgb(32,177,255);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.5s;
+      border-radius: 0.25em;
+      margin-top: 45px;
+      margin-left:12.5em;
+  }
+
+  .changeSubmit:disabled{
+    border : none;
+      width : 120px;
+      height : 3em;
+      color: white;
+      background-color:  rgb(184, 226, 247);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.5s;
+      border-radius: 0.25em;
+      margin-top: 45px;
+      margin-left:12.5em;
+  }
+
+  .dropSubmit:disabled{
+    border : none;
+      width : 120px;
+      height : 3em;
+      color: white;
+      background-color:  rgb(184, 226, 247);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: 0.5s;
+      border-radius: 0.25em;
+      margin-top: 25px;
+      margin-left:12.5em;
+  }
+
+  
+  .dropSubmit:hover {
+    transform: scale(1.08);
+  }
+
+  .pwConfirm {
+    border: none;
+    border-radius: 2px;
+    width: 50px;
+    height: 33px;
+    margin-left: 10px;
+  }
+  
+  .drop_p {
+    width: 318px;
+    margin-left: 100px;
+    font-size: 13px;
+    color: rgb(134, 134, 134);
+  }
+
+  .errorChangePw {
+    position: absolute;
+    margin-top: 8px;
+    color : red;
+    font-size: 12px;
+    margin-left: 14%;
+  }
+  
+  
+  

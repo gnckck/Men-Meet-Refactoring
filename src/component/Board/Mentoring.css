@@ -1,5 +1,6 @@
 .MentoringBoard {
     margin-top: 100px;
+    text-align: center;
 }
 
 .selectCategory {
@@ -18,6 +19,7 @@
     border: none;
     background-color: lightblue;
     color: white;
+    margin-right: 825px;
 }
 
 

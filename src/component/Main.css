@@ -1,0 +1,85 @@
+
+.inforMenmeet {
+    margin-top: 10em;
+    text-align: left;
+    background-image: url(/src/image/back4.gif);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position-x: 32em;
+    height: 500px;
+}
+
+.titleMain {
+   font-size: 38px;
+   background: linear-gradient(to right, rgb(193, 235, 252) 0%, rgb(175, 149, 236) 100%);
+   background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+   
+}
+
+.titleMeta {
+    font-size: 38px;
+    color:rgb(241, 241, 184);
+}
+
+.contentFlatform {
+    margin-top: 50px;
+    font-size: 17px;
+}
+
+.imgVr {
+    background-image: url(/src/image/vr.gif);
+    background-repeat: no-repeat;
+    height: 500px;
+    margin-bottom: 60em;
+}
+
+.rowMain {
+    margin-left: 30em;
+    height: 700px;
+}
+
+.mb-3 {
+    width: 1200px;
+    margin-left: 22em;
+}
+
+.tabMetaverse {
+    text-align: center;
+    margin-top: 70px;
+}
+
+.tabDownload {
+    text-align: center;
+}
+
+.pMeta {
+    margin-left: 24px;
+}
+
+.btnDownload {
+    font-family: "Helvetica", "Arial", sans-serif;
+    width: 300px;
+    height: 70px;
+    display: inline-block;
+    font-size: 1em;
+    padding: 1em 2em;
+    margin-top: 100px;
+    margin-bottom: 60px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #ff0081;
+    color: #fff;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+    box-shadow: 0 2px 25px rgba(255, 0, 130, 0.5);
+  }
+
+  
+
+  
+  

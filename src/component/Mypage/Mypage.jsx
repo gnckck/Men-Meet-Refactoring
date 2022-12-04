@@ -3,10 +3,9 @@ import { useState, useEffect } from 'react';
 import { FiUser } from "react-icons/fi";
 import { FiEdit } from "react-icons/fi";
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
-import { IdState, userState, DropModalState, ChangePwModalState } from '../State';
+import { IdState, userState, ChangePwModalState } from '../State';
 import { Table } from 'react-bootstrap';
 import axios from 'axios';
-import DropUserModal from './DropUserModal';
 import ChangePwModal from './ChangePwModal';
 
 
@@ -14,9 +13,7 @@ function Mypage() {
 
 
   const [sliderIdx, setSliderIdx] = useState(0);
-  const [dropModalOpen, setDropModalOpen] = useRecoilState(DropModalState);
   const [changeModalOpen, setChangeModalOpen] = useRecoilState(ChangePwModalState);
-  const setCloseModal = useSetRecoilState(DropModalState);
   const setPwCloseModal = useSetRecoilState(ChangePwModalState);
 
 
@@ -24,11 +21,10 @@ function Mypage() {
 
 
   const isModal = () => {
-      if(dropModalOpen === true){
-      setCloseModal(false);
-      }else{
-      setPwCloseModal(false);
+      if(changeModalOpen === true){
+        setPwCloseModal(false);
       }
+      
   }
 
   const [writePost,setWritePost] = useState([{
@@ -67,10 +63,6 @@ function Mypage() {
     }]);
 
 
-    const handleDropModal = (e) => {
-        e.preventDefault();
-        setDropModalOpen(true);
-      }
 
       const handleChangeModal = (e) => {
         e.preventDefault();
@@ -129,11 +121,6 @@ return(
           {changeModalOpen && (
             <ChangePwModal closeModal={() => setChangeModalOpen(!changeModalOpen)}>
             </ChangePwModal>
-          )}
-          <p className='witUser' onClick={handleDropModal}>< FiEdit /> 회원 탈퇴</p>
-          {dropModalOpen && (
-            <DropUserModal closeModal={() => setDropModalOpen(!dropModalOpen)}>
-            </DropUserModal>
           )}
           </ div>
         </div>

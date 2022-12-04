@@ -9,6 +9,7 @@ import axios from 'axios';
 import DropUserModal from './DropUserModal';
 import ChangePwModal from './ChangePwModal';
 
+
 function Mypage() {
 
 
@@ -17,6 +18,8 @@ function Mypage() {
   const [changeModalOpen, setChangeModalOpen] = useRecoilState(ChangePwModalState);
   const setCloseModal = useSetRecoilState(DropModalState);
   const setPwCloseModal = useSetRecoilState(ChangePwModalState);
+
+
     
 
 
@@ -138,7 +141,13 @@ return(
         <div className='Mypage_writePost' value= {sliderIdx === 1}>
         <div className="writePost">
           <Table>
-          <thead />
+          <thead>
+            <tr>
+            <th>번호</th>
+            <th>제목</th>
+            <th>구분</th>
+            </tr>
+          </thead>
           <tbody>
           {writePost.map((write)=>{
               return(
@@ -159,7 +168,7 @@ return(
         <Table>
         <thead>
           <tr>
-            <th>예약 번호</th>
+            <th>신청 번호</th>
             <th>제목</th>
             <th>신청 시간</th>
             <th>상태</th>
@@ -169,12 +178,12 @@ return(
         {apply.map((app)=>{
             return(
                 <tr key = {app.subscriptNum}>
-                    <td>{app.subscriptNum}</td>
+                    <td style={{color:'gray'}}>{app.subscriptNum}</td>
                     <td>{app.postTitle}</td>
                     <td>{app.applyTime}</td>
                     <td>{app.state === 0 ? "대기중" :
                         app.state === 1 ? "수락" :
-                        "거절"}</td>
+                        <div style={{color:'red'}}>거절</div>}</td>
                 </tr>
             )
         })}
@@ -189,7 +198,7 @@ return(
         <Table>
           <thead>
           <tr>
-            <th>예약 번호</th>
+            <th>신청 번호</th>
               <th>제목</th>
               <th>신청 시간</th>
               <th>상태</th>
@@ -199,12 +208,31 @@ return(
           {recApply.map((rec)=>{
               return(
                   <tr key = {rec.subscriptNum}>
-                      <td>{rec.subscriptNum}</td>
+                      <td style={{color:'gray'}}>{rec.subscriptNum}</td>
                       <td>{rec.postTitle}</td>
                       <td>{rec.applyTime}</td>
-                      <td>{rec.state === 0 ? "대기중" :
-                          rec.state === 1 ? "수락" :
-                          "거절"}</td>
+                      <td>{
+                      rec.state === 0 ?
+                      <><button className='stateBtn'
+                        onClick={() => {
+                          axios.post(`http://52.79.209.184:8080/reservation/acceptMentoring`, {
+                            requestNum: rec.subscriptNum,
+                            receivedUserId: userId,
+                          }).then(() => {
+                            alert('멘토링 신청을 수락했습니다.');
+                            window.location.replace("/mypage");
+                          });
+                        } }>수락</button><button className='stateBtn'
+                          onClick={(e) => {
+                            e.preventDefault();
+                            axios.get(`http://52.79.209.184:8080/reservation/rejectMentoring/${rec.subscriptNum}`)
+                              .then(() => {
+                                alert('멘토링 신청을 거절했습니다.');
+                                window.location.replace("/mypage");
+                              });
+                          } }>거절</button></> :
+                          rec.state === 1 ? <div>수락</div> : <div style={{color:'red'}}>거절</div> }
+                      </td>
                   </tr>
               )
           })}
@@ -229,7 +257,7 @@ return(
       {reservationPost.map((reservation)=>{
           return(
               <tr key = {reservation.reservationNum}>
-                  <td>{reservation.reservationNum}</td>
+                  <td style={{color:'gray'}}>{reservation.reservationNum}</td>
                   <td>{reservation.title}</td>
                   <td>{reservation.mentorId}</td>
                   <td>{reservation.menteeId}</td>
@@ -242,6 +270,7 @@ return(
       </div>
         </div>
       </div>
+
       <div className="information">
         <p style={{color:'gray', fontSize:'12px', marginLeft:'18em'}}>Copyright 2022. Mentoss. all rights reserved.</p>
       </div>

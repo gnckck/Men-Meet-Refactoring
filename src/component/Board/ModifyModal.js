@@ -5,7 +5,7 @@ import DatePicker from "react-datepicker";
 import { ko } from "date-fns/esm/locale";
 import { useState } from 'react';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { IdState, ModifyModalState, postState, userState } from '../State';
+import { IdState, ModifyModalState, postState, userState,PostModalState } from '../State';
 import moment from 'moment';
 import 'moment/locale/ko';
 import axios from 'axios';
@@ -13,10 +13,10 @@ import axios from 'axios';
 
 
 function ModifyModal() {
-
+    
+    const setModalClose = useSetRecoilState(ModifyModalState);
+    const setCloseModal = useSetRecoilState(PostModalState);
     const [startDate, setStartDate] = useState(new Date());
-    
-    
     const [title,setTitle] = useState("");
     const [content,setContent] = useState("");
     const [category, setCategory] = useState("0");
@@ -27,7 +27,7 @@ function ModifyModal() {
     const writeTime = moment().format('YYYY-MM-DD hh:mm:ss');
     const mentoringTime = moment(startDate).format('YYYY-MM-DD hh:mm:ss');
     
-    const setModalClose = useSetRecoilState(ModifyModalState);
+
     const userId = useRecoilValue(IdState);
     const userName = useRecoilValue(userState);
 
@@ -79,11 +79,13 @@ function ModifyModal() {
           },{
             headers : { "Content-Type": `application/json`, },
            }).then((res) => {
-            console.log(res);
             setPostEnable("0");
-            setModalClose(false);
-           })
             alert("게시글이 수정되었습니다.")
+            setModalClose(false);
+            setCloseModal(false);
+            window.location.replace("/mentoring");
+           })
+           
         }
 
     
